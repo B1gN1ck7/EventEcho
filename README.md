@@ -10,3 +10,20 @@ AI features are integrated using Hugging Face APIs.
 - Comment Moderation – ensures respectful and safe interactions in the comment section.
 
 ## Repository Structure
+/frontend → React-based frontend (user interface)
+/backend → Backend with Flask app (AI integration, APIs)
+/setup.md → Setup instructions for development
+
+
+## Branching Strategy
+We use a feature branch workflow:
+
+- main → stable, production-ready code  
+- dev → active development branch  
+- feature/[feature-name] → feature-specific work (e.g., `feature/chat-assistant`)  
+- bugfix/[issue] → bug fixes  
+
+See [CONTRIBUTING.md] for detailed contribution guidelines.  
+
+## Project Management
+We use GitHub Projects (Kanban) to manage tasks
