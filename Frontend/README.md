@@ -1,6 +1,6 @@
 # EventEcho Frontend
 
-A modern, responsive frontend for the EventEcho application built with vanilla HTML, CSS, and JavaScript.
+A modern, responsive frontend for the EventEcho application built with vanilla HTML, CSS, JavaScript, python, and more.
 
 ## Features
 
