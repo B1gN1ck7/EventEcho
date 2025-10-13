@@ -1,0 +1,23 @@
+{
+  "name": "eventecho-frontend",
+  "version": "1.0.0",
+  "description": "EventEcho Frontend - A modern event management platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "python server.py",
+    "dev": "python server.py",
+    "serve": "python -m http.server 8080"
+  },
+  "keywords": [
+    "events",
+    "management",
+    "frontend",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "EventEcho Team",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
