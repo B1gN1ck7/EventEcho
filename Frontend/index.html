@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventEcho - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation will be dynamically loaded here -->
+        <nav id="navigation"></nav>
+        
+        <!-- Main content area -->
+        <main id="main-content">
+            <!-- Content will be dynamically loaded here -->
+        </main>
+    </div>
+
+    <!-- Event Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Event</h2>
+                <span class="close">&times;</span>
+            </div>
+            
+            <form id="eventForm" class="event-form">
+                <!-- Event Title -->
+                <div class="form-group">
+                    <input type="text" id="eventTitle" name="eventTitle" placeholder="Edit title" required>
+                </div>
+
+                <!-- Invite People -->
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <span class="input-icon">👤</span>
+                        <input type="text" id="invitePeople" name="invitePeople" placeholder="Invite people">
+                    </div>
+                </div>
+
+                <!-- Date and Time Section -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <div class="input-with-icon">
+                            <span class="input-icon">🕐</span>
+                            <div class="datetime-group">
+                                <input type="date" id="eventDate" name="eventDate" required>
+                                <div class="time-group">
+                                    <input type="time" id="startTime" name="startTime" value="21:00">
+                                    <span class="time-separator">-</span>
+                                    <input type="time" id="endTime" name="endTime" value="22:00">
+                                </div>
+                                <div class="time-options">
+                                    <div class="toggle-group">
+                                        <span class="toggle-label">Format:</span>
+                                        <button type="button" class="toggle-btn" data-format="24hr">24hr</button>
+                                        <button type="button" class="toggle-btn" data-format="12hr">12hr</button>
+                                    </div>
+                                    <div class="toggle-group">
+                                        <button type="button" class="toggle-btn" data-toggle="allDay">All day</button>
+                                        <button type="button" class="toggle-btn" data-toggle="rsvp">RSVP Event?</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select id="repeatOption" name="repeatOption">
+                                        <option value="none">Does not repeat</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <span class="input-icon">📍</span>
+                        <input type="text" id="eventLocation" name="eventLocation" placeholder="Edit room or location">
+                    </div>
+                    <small class="form-note">Note: Events are reserved in the order received — location availability may change until you submit the event.</small>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <span class="input-icon">☰</span>
+                        <textarea id="eventDescription" name="eventDescription" placeholder="Edit description" rows="4"></textarea>
+                    </div>
+                </div>
+
+                <!-- Media Upload -->
+                <div class="form-group">
+                    <button type="button" class="upload-btn">Upload media</button>
+                </div>
+
+                <!-- AI Generation -->
+                <div class="form-group">
+                    <button type="button" class="ai-generate-btn">
+                        <span class="sparkle-icon">✨</span>
+                        Generate with AI
+                    </button>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <div class="footer-right">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="sendNotification" name="sendNotification">
+                            <span class="checkmark"></span>
+                            Send notification to attendees
+                        </label>
+                        <button type="submit" class="btn btn-primary" id="updateBtn">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
