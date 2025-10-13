@@ -27,3 +27,4 @@ See [CONTRIBUTING.md] for detailed contribution guidelines.
 
 ## Project Management
 We use GitHub Projects (Kanban) to manage tasks
+We use Jira to manage Sprints and backlogs
