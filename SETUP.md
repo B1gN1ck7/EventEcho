@@ -25,7 +25,7 @@ Requirements
 2. Environment Variables
 	Create .env files in both frontend/ and backend/.
 
-	Backend .env (inside ScholarXcel/backend/.env)		
+	Backend .env (inside ScholarXCel/backend/.env)		
 		# Server
 		PORT=5000
 		NODE_ENV=development
@@ -43,7 +43,7 @@ Requirements
 		AI_MODEL=gpt2
 		AI_DEVICE=api
 	
-	Frontend .env.local (inside ScholarXcel/frontend/.env.local)
+	Frontend .env.local (inside ScholarXCel/frontend/.env.local)
 		NEXT_PUBLIC_API_URL=http://localhost:5000
 
 3. Database Setup
@@ -100,4 +100,4 @@ Requirements
 		docs: update setup guide
 		chore: update dependencies
 
-Done! EventEcho should now be running locally or in production 
+Done! EventEcho should now be running locally or in production
