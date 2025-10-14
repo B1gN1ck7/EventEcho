@@ -12,7 +12,7 @@ AI features are integrated using Hugging Face APIs.
 ## Repository Structure
 /frontend → React-based frontend (user interface) \
 /backend → Backend with Flask app (AI integration, APIs) \
-/setup.md → Setup instructions for development \
+/setup.md → Setup instructions for development
 
 
 ## Branching Strategy
