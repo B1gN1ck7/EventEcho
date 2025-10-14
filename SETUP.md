@@ -20,8 +20,9 @@ Frontend uses basic **HTML**, **CSS**, and **JavaScript**, so no framework is re
 git clone https://github.com/B1gN1ck7/EventEcho.git
 cd EventEcho
 ```
-```
+
 Project structure:
+```
 EventEcho/
 ├── backend/      # Python REST API (Flask or FastAPI)
 ├── frontend/     # Static HTML/CSS/JS frontend
