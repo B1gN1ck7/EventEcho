@@ -6,6 +6,7 @@ Run this script to serve the frontend on a local server
 
 import http.server
 import socketserver
+import socket
 import os
 import sys
 from pathlib import Path
@@ -38,20 +39,41 @@ def main():
         print("Error: index.html not found in the frontend directory")
         sys.exit(1)
     
-    # Create server
-    with socketserver.TCPServer((HOST, PORT), CustomHTTPRequestHandler) as httpd:
-        print(f"🚀 EventEcho Frontend Server running at:")
-        print(f"   http://{HOST}:{PORT}")
-        print(f"   http://localhost:{PORT}")
-        print("\n📁 Serving files from:", frontend_dir.absolute())
-        print("\n🔄 Press Ctrl+C to stop the server")
-        print("-" * 50)
-        
+    # Create server with address reuse and port fallback
+    class ReusableTCPServer(socketserver.TCPServer):
+        allow_reuse_address = True
+
+    httpd = None
+    selected_port = PORT
+    candidate_ports = [PORT] + list(range(PORT + 1, PORT + 11))
+
+    for candidate in candidate_ports:
         try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            print("\n\n👋 Server stopped. Goodbye!")
-            sys.exit(0)
+            httpd = ReusableTCPServer((HOST, candidate), CustomHTTPRequestHandler)
+            selected_port = candidate
+            break
+        except OSError:
+            continue
+
+    if httpd is None:
+        print(f"Error: Could not bind to ports {candidate_ports[0]}-{candidate_ports[-1]}.")
+        print("Another process may be using these ports. Try freeing a port or choose a different one.")
+        sys.exit(1)
+
+    print(f"🚀 EventEcho Frontend Server running at:")
+    print(f"   http://{HOST}:{selected_port}")
+    print(f"   http://localhost:{selected_port}")
+    if selected_port != PORT:
+        print(f"\nℹ️  Port {PORT} was busy. Using available port {selected_port} instead.")
+    print("\n📁 Serving files from:", frontend_dir.absolute())
+    print("\n🔄 Press Ctrl+C to stop the server")
+    print("-" * 50)
+
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\n\n👋 Server stopped. Goodbye!")
+        sys.exit(0)
 
 if __name__ == '__main__':
     main()
