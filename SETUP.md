@@ -28,6 +28,7 @@ EventEcho/
 ├── docs/         # Documentation and database schemas
 └── README.md
 
+
 ## 2. TODO: Environment Variables
 
 Create a .env file inside backend/:
@@ -35,18 +36,19 @@ Create a .env file inside backend/:
 PORT=5000
 ENV=development
 
-# Database (work in progress, details pending)
+### Database (work in progress, details pending)
 DATABASE_URL=postgresql://<user>:<password>@localhost:5432/eventecho
 
-# JWT Auth (may not be using, check with contributors)
+### JWT Auth (may not be using, check with contributors)
 JWT_SECRET=your-secret-key
 
-# File storage (work in progress, details pending)
+### File storage (work in progress, details pending)
 UPLOAD_DIR=uploads
 
-# If the frontend needs to call the API, we need to define an API base URL in JS or a small config file, e.g.:
+### If the frontend needs to call the API, we need to define an API base URL in JS or a small config file, e.g.:
 // frontend/config.js
 const API_URL = "http://localhost:5000";
+
 
 ## TODO: 3. Database Setup
 
@@ -63,6 +65,7 @@ CREATE DATABASE eventecho;
 Run your schema or migrations (if provided):
 
 psql -U postgres -d eventecho -f docs/schema.sql
+
 
 ## 4. Backend Setup
 cd backend
@@ -94,11 +97,13 @@ Then visit http://localhost:3000
 
 If the frontend calls the backend API, make sure both are running.
 
+
 ## TODO: 6. Development Commands
 Backend
 pytest           # Run tests
 flake8 .         # Linting
 black .          # Auto-formatting
+
 
 ## TODO: 7. Branching & Commits
 
