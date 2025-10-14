@@ -11,10 +11,10 @@ import re
 app = Flask(__name__)
 
 DB_CONF = {
-    "user": "root",           # Replace with your DB user
-    "password": "password",   # Replace with your DB password
+    "user": "postgres",         # Your server username
+    "password": "eventecho",    # Your DB password
     "host": "localhost",
-    "dbname": "EventEcho",    # Changed to your database name
+    "dbname": "EventEcho",      # Your database name (case sensitive)
 }
 ph = PasswordHasher()
 
@@ -22,9 +22,11 @@ def get_db_connection():
     return psycopg2.connect(**DB_CONF)
 
 def is_valid_username(username):
+    # Only allow 3-32 alphanumeric/underscore characters
     return bool(username and re.fullmatch(r"[A-Za-z0-9_]{3,32}", username))
 
 def is_strong_password(password):
+    # User password should be at least 8 characters
     return bool(password and len(password) >= 8)
 
 @app.route("/health")
