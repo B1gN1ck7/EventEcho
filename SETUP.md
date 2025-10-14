@@ -29,7 +29,7 @@ EventEcho/
 └── README.md
 
 
-## 2. TODO: Environment Variables
+## TODO: 2. Environment Variables
 
 Create a .env file inside backend/:
 
