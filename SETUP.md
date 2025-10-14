@@ -17,12 +17,14 @@ Requirements
 	git clone https://github.com/<your-org>/EventEcho.git
 	cd EventEcho
 	The project is structured as:
+```
 		EventEcho/
  		├── frontend/      # Next.js (HTML + CSS + JS)
  		├── backend/       # Node.js (Python)
  		├── docs/          # Documentation
  		└── SETUP.md
-2. Environment Variables
+```
+3. Environment Variables
 	Create .env files in both frontend/ and backend/.
 
 	Backend .env (inside ScholarXCel/backend/.env)		
@@ -46,7 +48,7 @@ Requirements
 	Frontend .env.local (inside ScholarXCel/frontend/.env.local)
 		NEXT_PUBLIC_API_URL=http://localhost:5000
 
-3. Database Setup
+4. Database Setup
 	Create the database and run migrations.
 
 		# Access Postgres
@@ -58,7 +60,7 @@ Requirements
 		Run schema setup (see docs/schema.sql or migrations):
 			psql -U postgres -d scholarxcel -f docs/schema.sql
 
-4. Install Dependencies
+5. Install Dependencies
 	Backend
 		cd backend
 		npm install
@@ -66,7 +68,7 @@ Requirements
 		cd ../frontend
 		npm install
 
-5. Run Locally
+6. Run Locally
 	Start backend:
 		cd backend
 		npm run dev
@@ -77,7 +79,7 @@ Requirements
 	Frontend should now run at http://localhost:3000
 	Backend should run at http://localhost:5000
 
-6. Development Commands
+7. Development Commands
 	# Backend (Python)
 	pytest            # run tests
 	flake8 .          # linting
@@ -87,7 +89,7 @@ Requirements
 	npm run lint
 	npm run test
 
-7. Branching Strategy & Commit Conventions
+8. Branching Strategy & Commit Conventions
 	Branching
 		main → production-ready
 		dev → active development
