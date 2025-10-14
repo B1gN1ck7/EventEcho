@@ -13,7 +13,7 @@ DB_CONF = {
     "user": "root",           # Replace with your DB user
     "password": "password",   # Replace with your DB password
     "host": "localhost",
-    "database": "auth_name", #I need DB Name
+    "database": "auth_person", #I need DB Name
 }
 ph = PasswordHasher()
 
