@@ -98,7 +98,7 @@ If the frontend calls the backend API, make sure both are running.
 Backend
 pytest           # Run tests        \
 flake8 .         # Linting          \
-black .          # Auto-formatting  \
+black .          # Auto-formatting
 
 ## TODO: 7. Branching & Commits
 
