@@ -20,19 +20,18 @@ Frontend uses basic **HTML**, **CSS**, and **JavaScript**, so no framework is re
 git clone https://github.com/B1gN1ck7/EventEcho.git
 cd EventEcho
 ```
-
+```
 Project structure:
 EventEcho/
 ├── backend/      # Python REST API (Flask or FastAPI)
 ├── frontend/     # Static HTML/CSS/JS frontend
 ├── docs/         # Documentation and database schemas
 └── README.md
-
+```
 
 ## TODO: 2. Environment Variables
 
 Create a .env file inside backend/:
-
 PORT=5000
 ENV=development
 
@@ -53,12 +52,10 @@ const API_URL = "http://localhost:5000";
 ## TODO: 3. Database Setup
 
 Open PostgreSQL:
-
 psql -U postgres
 
 
 Create the database:
-
 CREATE DATABASE eventecho;
 
 
@@ -67,31 +64,29 @@ Run your schema or migrations (if provided):
 psql -U postgres -d eventecho -f docs/schema.sql
 
 
-## 4. Backend Setup
+## TODO: 4. Backend Setup
 cd backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
 
+python -m venv venv
+
+source venv/bin/activate
+
+pip install -r requirements.txt
 
 Start the backend server (example for Flask/FastAPI):
 
 python app.py
-
 
 The API should now be running at http://localhost:5000
 
 ## TODO: 5. Frontend Setup
 
 If it’s a static frontend:
-
 Just open frontend/index.html in your browser, or
 
 Serve it via a simple Python server:
-
 cd frontend
 python -m http.server 3000
-
 
 Then visit http://localhost:3000
 
@@ -99,11 +94,11 @@ If the frontend calls the backend API, make sure both are running.
 
 
 ## TODO: 6. Development Commands
-Backend
-pytest           # Run tests
-flake8 .         # Linting
-black .          # Auto-formatting
 
+Backend
+pytest           # Run tests        \
+flake8 .         # Linting          \
+black .          # Auto-formatting  \
 
 ## TODO: 7. Branching & Commits
 
@@ -118,5 +113,7 @@ fix/* --> bug fixes
 Example Commit Message Conventions:
 
 feat: add event registration endpoint
+
 fix: correct database connection settings
+
 docs: update setup instructions
