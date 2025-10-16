@@ -14,3 +14,6 @@ def create_app(config_class=Config):
 
     @app.get("/health")
     def health():
+        return {"status": "ok"}, 200
+
+    return app
