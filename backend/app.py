@@ -84,3 +84,4 @@ def login():
 
 if __name__ == "__main__":
     app.run(port=3000)
+        app.run(debug=false)  # keep off debug until its ready to fully be ran.
