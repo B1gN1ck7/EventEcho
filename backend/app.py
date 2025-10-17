@@ -1,9 +1,8 @@
 # backend/app.py
-# pip install Flask psycopg2-binary argon2-cffi
 
 from flask import Flask, jsonify, request
 import psycopg2
-from psycopg2 import errors
+from psycopg2 import IntegrityError
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 import re
@@ -12,7 +11,7 @@ app = Flask(__name__)
 
 DB_CONF = {
     "user": "postgres",         # Your server username
-    "password": "eventecho",    # Your DB password
+    "password": "Reds0404!",    # Your DB password
     "host": "localhost",
     "dbname": "EventEcho",      # Your database name (case sensitive)
 }
@@ -35,8 +34,10 @@ def health():
 
 @app.route("/register", methods=["POST"])
 def register():
-    username = request.form.get("username")
-    password = request.form.get("password")
+    # Accept JSON or form-encoded bodies
+    data = request.get_json(silent=True) or request.form
+    username = data.get("username")
+    password = data.get("password")
 
     if not is_valid_username(username):
         return "Invalid username.", 400
@@ -50,16 +51,25 @@ def register():
                 sql = "INSERT INTO users (username, password_hash) VALUES (%s, %s)"
                 cur.execute(sql, (username, password_hash))
             db.commit()
-        return "Registration successful!", 200
-    except psycopg2.errors.UniqueViolation:
-        return "Registration failed. Please try another username.", 400
+        return jsonify(message="Registration successful"), 200
+    except IntegrityError as e:
+        # psycopg2 raises IntegrityError for unique constraint violations.
+        # Check SQLSTATE code for unique_violation (23505)
+        pgcode = getattr(e, 'pgcode', None)
+        if pgcode == '23505':
+            return jsonify(error="Username already exists"), 400
+        # Re-raise or return generic error for other integrity issues
+        return jsonify(error="Registration failed due to constraint error"), 400
     except Exception as e:
-        return "Registration failed.", 500
+        # Log exception in real app
+        return jsonify(error="Registration failed"), 500
 
 @app.route("/login", methods=["POST"])
 def login():
-    username = request.form.get("username")
-    password = request.form.get("password")
+    # Accept JSON or form-encoded bodies
+    data = request.get_json(silent=True) or request.form
+    username = data.get("username")
+    password = data.get("password")
 
     if not is_valid_username(username) or not is_strong_password(password):
         return "Invalid username or password.", 400
@@ -70,18 +80,18 @@ def login():
                 cur.execute("SELECT password_hash FROM users WHERE username=%s", (username,))
                 row = cur.fetchone()
     except Exception:
-        return "Login failed.", 500
+        return jsonify(error="Login failed"), 500
 
     if not row:
-        return "Invalid username or password.", 400
+        return jsonify(error="Invalid username or password"), 400
 
     stored_hash = row[0]
     try:
         ph.verify(stored_hash, password)
-        return f"Welcome, {username}! Login successful.", 200
+        return jsonify(message=f"Welcome, {username}! Login successful."), 200
     except VerifyMismatchError:
-        return "Invalid username or password.", 400
+        return jsonify(error="Invalid username or password"), 400
 
 if __name__ == "__main__":
-    app.run(port=5000)
-        app.run(debug=false)  # keep off debug until its ready to fully be ran.
+    # In production use a WSGI server; keep debug off by default
+    app.run(host="0.0.0.0", port=5000, debug=False)
