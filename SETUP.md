@@ -1,103 +1,120 @@
-# EventEcho – Setup Guide
+# EventEcho Setup Guide
 
 This guide explains how to set up EventEcho locally for development.
 
 ---
 
-Requirements
+## Requirements
 
-- **Python** 3.10.11
-- **PostgreSQL** (>= 14)
+- **Python** 3.10+
+- **PostgreSQL** 14+
 - **Git**
+
+Frontend uses basic **HTML**, **CSS**, and **JavaScript**, so no framework is required.
 
 ---
 
-1. Clone the Repository
+## 1. Clone the Repository
 
-	git clone https://github.com/<your-org>/EventEcho.git
-	cd EventEcho
-	The project is structured as:
-		EventEcho/
- 		├── frontend/      # Next.js (HTML + CSS + JS)
- 		├── backend/       # Node.js (Python)
- 		├── docs/          # Documentation
- 		└── SETUP.md
-2. Environment Variables
-	Create .env files in both frontend/ and backend/.
+```bash
+git clone https://github.com/B1gN1ck7/EventEcho.git
+cd EventEcho
+```
 
-	Backend .env (inside ScholarXCel/backend/.env)		
-		# Server
-		PORT=5000
-		NODE_ENV=development
+Project structure:
+```
+EventEcho/
+├── backend/      # Python REST API (Flask or FastAPI)
+├── frontend/     # Static HTML/CSS/JS frontend
+├── docs/         # Documentation and database schemas
+└── README.md
+```
 
-		# Database
-		DATABASE_URL=postgresql://<user>:<password>@localhost:5432/scholarxcel
+## TODO: 2. Environment Variables
 
-		# JWT Auth
-		JWT_SECRET=your-secret-key
+Create a .env file inside backend/:
+PORT=5000
+ENV=development
 
-		# File storage (local or S3-compatible later)
-		UPLOAD_DIR=uploads
+### Database (work in progress, details pending)
+DATABASE_URL=postgresql://<user>:<password>@localhost:5432/eventecho
 
-		# AI model
-		AI_MODEL=gpt2
-		AI_DEVICE=api
-	
-	Frontend .env.local (inside ScholarXCel/frontend/.env.local)
-		NEXT_PUBLIC_API_URL=http://localhost:5000
+### JWT Auth (may not be using, check with contributors)
+JWT_SECRET=your-secret-key
 
-3. Database Setup
-	Create the database and run migrations.
+### File storage (work in progress, details pending)
+UPLOAD_DIR=uploads
 
-		# Access Postgres
-		psql -U postgres
+### If the frontend needs to call the API, we need to define an API base URL in JS or a small config file, e.g.:
+// frontend/config.js
+const API_URL = "http://localhost:5000";
 
-		# Inside psql shell:
-		CREATE DATABASE EventEcho;
 
-		Run schema setup (see docs/schema.sql or migrations):
-			psql -U postgres -d scholarxcel -f docs/schema.sql
+## TODO: 3. Database Setup
 
-4. Install Dependencies
-	Backend
-		cd backend
-		npm install
-	Frontend
-		cd ../frontend
-		npm install
+Open PostgreSQL:
+psql -U postgres
 
-5. Run Locally
-	Start backend:
-		cd backend
-		npm run dev
-	Start frontend:
-		cd ../frontend
-		npm run dev
-	
-	Frontend should now run at http://localhost:3000
-	Backend should run at http://localhost:5000
 
-6. Development Commands
-	# Backend (Python)
-	pytest            # run tests
-	flake8 .          # linting
-	black .           # formatting
+Create the database:
+CREATE DATABASE eventecho;
 
-	# Frontend (JS)
-	npm run lint
-	npm run test
 
-7. Branching Strategy & Commit Conventions
-	Branching
-		main → production-ready
-		dev → active development
-		feature/* → new features
-		fix/* → bug fixes
+Run your schema or migrations (if provided):
 
-	Commit Messages (Conventional Commits)
-		feat: add email API integration with Brevo
-		fix: correct DB connection error
-		docs: update setup guide
-		chore: update dependencies
+psql -U postgres -d eventecho -f docs/schema.sql
 
-Done! EventEcho should now be running locally or in production
+
+## TODO: 4. Backend Setup
+cd backend
+
+python -m venv venv
+
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+Start the backend server (example for Flask/FastAPI):
+
+python app.py
+
+The API should now be running at http://localhost:5000
+
+## TODO: 5. Frontend Setup
+
+If it’s a static frontend:
+Just open frontend/index.html in your browser, or
+
+Serve it via a simple Python server:
+cd frontend
+python -m http.server 3000
+
+Then visit http://localhost:3000
+
+If the frontend calls the backend API, make sure both are running.
+
+
+## TODO: 6. Development Commands
+
+Backend
+pytest           # Run tests        \
+flake8 .         # Linting          \
+black .          # Auto-formatting
+
+## TODO: 7. Branching & Commits
+
+Branching
+
+main --> production-ready
+
+feature/* --> new features
+
+fix/* --> bug fixes
+
+Example Commit Message Conventions:
+
+feat: add event registration endpoint
+
+fix: correct database connection settings
+
+docs: update setup instructions

@@ -1,0 +1,8 @@
+Flask
+mysql-connector-python
+argon2-cffi
+
+##run pip install -r requirements.txt once this text is complete.
+##Flask - for your backend web framework
+##mysql-connector-python — for interacting with MySQL database
+##argon2-cffi — for secure Argon2id password hashing

@@ -318,7 +318,7 @@ class Router {
         if (pageName === 'calendar') {
             // Initialize FullCalendar
             setTimeout(() => {
-                const calendarEl = document.getElementById('calendar');
+                const calendarEl = document.getElementById('calendarContainer');
                 console.log('Calendar element found:', calendarEl);
                 
                 if (calendarEl) {
@@ -336,24 +336,34 @@ class Router {
                     // Create new FullCalendar instance
                     window.calendarInstance = new FullCalendar.Calendar(calendarEl, {
                         initialView: 'dayGridMonth',
+                        
                         headerToolbar: {
                             left: 'prev,next today',
                             center: 'title',
                             right: 'dayGridMonth,timeGridWeek,timeGridDay'
                         },
+
+                        buttonText: {
+                            today: 'Today',
+                            month: 'Month',
+                            week: 'Week',
+                            day: 'Day'
+                        },
                         height: 'auto',
                         aspectRatio: 1.8,
+
+                        // TODO: TEST EVENTS
                         events: [
                             {
                                 title: 'Team Meeting',
-                                start: '2024-01-15T10:00:00',
+                                start: '2025-10-14T10:00:00',
                                 backgroundColor: '#dc2626',
                                 borderColor: '#b91c1c'
                             },
                             {
                                 title: 'Conference',
-                                start: '2024-01-20T09:00:00',
-                                end: '2024-01-22T17:00:00',
+                                start: '2025-10-14T07:00:00',
+                                end: '2025-10-14T07:00:00',
                                 backgroundColor: '#dc2626',
                                 borderColor: '#b91c1c'
                             }
@@ -365,6 +375,7 @@ class Router {
                     
                     // Render the calendar
                     window.calendarInstance.render();
+
                     console.log('Calendar rendered successfully');
                 } else {
                     console.error('Calendar element not found!');
@@ -439,7 +450,7 @@ class Router {
                 <h1>Calendar</h1>
                 <p>Manage your events and view your schedule</p>
             </div>
-            
+
             <!-- Calendar Controls -->
             <div class="calendar-controls">
                 <button id="addEventBtn" class="btn btn-primary">Add Event</button>
@@ -448,15 +459,14 @@ class Router {
                     <button class="btn btn-secondary">Export Calendar</button>
                 </div>
             </div>
-            
-            <!-- Calendar Container -->
+
+            <!-- FIXED: Changed ID from 'calendar' to 'calendarContainer' -->
             <div class="calendar-container">
                 <div class="calendar-wrapper">
-                    <div id="calendar"></div>
+                    <div id="calendarContainer"></div>
                 </div>
             </div>
-            
-            <!-- Calendar Info -->
+
             <div class="calendar-info">
                 <p>Click on a date to add a new event, or click on an existing event to view/edit details.</p>
             </div>
