@@ -1,0 +1,47 @@
+import os
+from openai import OpenAI
+
+def test_ai_model():
+    """Test the AI model with Hugging Face router API"""
+    try:
+        # Check if HF_TOKEN environment variable is set
+        if "HF_TOKEN" not in os.environ:
+            print("ERROR: HF_TOKEN environment variable not set!")
+            print("Please set your Hugging Face token:")
+            print("export HF_TOKEN='your_token_here'")
+            return
+        
+        print("Initializing AI client...")
+        client = OpenAI(
+            base_url="https://router.huggingface.co/v1",
+            api_key=os.environ["HF_TOKEN"],
+        )
+        
+        print("Sending request to AI model...")
+        completion = client.chat.completions.create(
+            model="moonshotai/Kimi-K2-Instruct-0905",
+            messages=[
+                {
+                    "role": "user",
+                    "content": "Write a dialogue between two characters meeting for the first time."
+                }
+            ],
+        )
+        
+        print("\nSUCCESS: AI Response:")
+        print("=" * 50)
+        print(completion.choices[0].message.content)
+        print("=" * 50)
+        
+        # Also print the full message object for debugging
+        print(f"\nFull response object: {completion.choices[0].message}")
+        
+    except Exception as e:
+        print(f"ERROR: {str(e)}")
+        print("Make sure you have:")
+        print("1. Set the HF_TOKEN environment variable")
+        print("2. Installed the openai package: pip install openai")
+        print("3. Valid Hugging Face API access")
+
+if __name__ == "__main__":
+    test_ai_model()

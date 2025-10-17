@@ -9,3 +9,4 @@ python-dotenv          # When needing to load .env locally
 argon2-cffi
 PyJWT                  # Make sure to use randomly gen keys
 psycopg2-binary        # May work as psycopg2[binary]
+openai                 # For AI model integration
