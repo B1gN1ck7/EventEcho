@@ -1,8 +1,9 @@
 # backend/app.py
-# pip install Flask mysql-connector-python argon2-cffi
+# pip install Flask psycopg2-binary argon2-cffi
 
 from flask import Flask, jsonify, request
-import mysql.connector
+import psycopg2
+from psycopg2 import errors
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 import re
@@ -10,15 +11,15 @@ import re
 app = Flask(__name__)
 
 DB_CONF = {
-    "user": "root",           # Replace with your DB user
-    "password": "password",   # Replace with your DB password
+    "user": "postgres",         # Your server username
+    "password": "eventecho",    # Your DB password
     "host": "localhost",
-    "database": "auth_person", #I need DB Name
+    "dbname": "EventEcho",      # Your database name (case sensitive)
 }
 ph = PasswordHasher()
 
 def get_db_connection():
-    return mysql.connector.connect(**DB_CONF)
+    return psycopg2.connect(**DB_CONF)
 
 def is_valid_username(username):
     # Only allow 3-32 alphanumeric/underscore characters
@@ -37,7 +38,6 @@ def register():
     username = request.form.get("username")
     password = request.form.get("password")
 
-    # Input validation
     if not is_valid_username(username):
         return "Invalid username.", 400
     if not is_strong_password(password):
@@ -49,12 +49,11 @@ def register():
             with db.cursor() as cur:
                 sql = "INSERT INTO users (username, password_hash) VALUES (%s, %s)"
                 cur.execute(sql, (username, password_hash))
-                db.commit()
+            db.commit()
         return "Registration successful!", 200
-    except mysql.connector.IntegrityError:
-        # Don't reveal if username exists
+    except psycopg2.errors.UniqueViolation:
         return "Registration failed. Please try another username.", 400
-    except Exception:
+    except Exception as e:
         return "Registration failed.", 500
 
 @app.route("/login", methods=["POST"])
@@ -73,7 +72,6 @@ def login():
     except Exception:
         return "Login failed.", 500
 
-    # Use generic invalid error
     if not row:
         return "Invalid username or password.", 400
 
@@ -86,3 +84,4 @@ def login():
 
 if __name__ == "__main__":
     app.run(port=3000)
+        app.run(debug=false)  # keep off debug until its ready to fully be ran.
