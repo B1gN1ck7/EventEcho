@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}Login · EventEcho{% endblock %}
 
 {% block content %}
@@ -11,15 +10,13 @@
           <label for="username">Username</label>
           <input type="text" id="username" name="username" value="{{ (form.username if form else '') | e }}" required>
         </div>
-
         <div class="form-row">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" required>
         </div>
-
         <div class="form-actions">
-          <button type="submit" class="btn primary">Login</button>
-          <a class="btn" href="{{ url_for('register') }}">Register</a>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <a class="btn btn-secondary" href="{{ url_for('register') }}">Register</a>
           <a class="btn" href="{{ url_for('forgot_password') }}">Forgot Password</a>
         </div>
       </form>
