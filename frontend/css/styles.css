@@ -897,3 +897,79 @@ select {
         justify-content: center;
     }
 }
+
+/* --- Login Page Layout (EventEcho) --- */
+.right-wrap {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: flex-end; /* push the card to the right */
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  margin-right: 1rem; /* keeps it off the extreme right edge */
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 2px solid transparent;
+}
+
+.card h2 {
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.card:hover {
+  border-color: #dc2626;
+}
+
+/* Form grid/rows for login page */
+.form-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row input[type="tel"],
+.form-row input[type="password"] {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-row input:focus {
+  outline: none;
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Keep the login card centered on smaller screens */
+@media (max-width: 768px) {
+  .right-wrap { justify-content: center; }
+  .login-card { margin-right: 0; }
+}
